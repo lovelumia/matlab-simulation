@@ -1,94 +1,94 @@
 clc
 clear
 close all
-dt=0.001;                                      %²ÉÑùÊ±¼ä¼ä¸ô
- fm=5;                                         %µ÷ÖÆĞÅºÅÆµÂÊ
- fc=20;                                        %ÔØ²¨ÆµÂÊ
- T=5;                                          %ĞÅºÅ³ÖĞøÊ±¼ä
- t=0:dt:T;                                     %Ê±¼äÊ¸Á¿
- mt=cos(2*pi*fm*t);                            %µ÷ÖÆĞÅºÅ
- ct=cos(2*pi*fc*t);                            %ÔØ²¨ĞÅºÅ
+dt=0.001;                                      %é‡‡æ ·æ—¶é—´é—´éš”
+ fm=5;                                         %è°ƒåˆ¶ä¿¡å·é¢‘ç‡
+ fc=20;                                        %è½½æ³¢é¢‘ç‡
+ T=5;                                          %ä¿¡å·æŒç»­æ—¶é—´
+ t=0:dt:T;                                     %æ—¶é—´çŸ¢é‡
+ mt=cos(2*pi*fm*t);                            %è°ƒåˆ¶ä¿¡å·
+ ct=cos(2*pi*fc*t);                            %è½½æ³¢ä¿¡å·
  
  figure(1)
  plot(t,mt);
- title('ÊäÈëĞÅºÅÊ±Óò²¨ĞÎ')
- axis([0 5 -1.01 1.01]);                       %xÖá×îĞ¡Öµ£¬×î´óÖµ£»yÖá×îĞ¡×î´óÖµ
- line([0,5],[0,0],'color','k');                %»­³ö£¨0£¬5£©µ½£¨2£¬4£©µÄÒ»ÌõÖ±Ïß
+ title('è¾“å…¥ä¿¡å·æ—¶åŸŸæ³¢å½¢')
+ axis([0 5 -1.01 1.01]);                       %xè½´æœ€å°å€¼ï¼Œæœ€å¤§å€¼ï¼›yè½´æœ€å°æœ€å¤§å€¼
+ line([0,5],[0,0],'color','k');                %ç”»å‡ºï¼ˆ0ï¼Œ5ï¼‰åˆ°ï¼ˆ2ï¼Œ4ï¼‰çš„ä¸€æ¡ç›´çº¿
  
  figure(2)
  [fmt,Fmt]=T2F(t,mt);
  plot(fmt,Fmt);
- title('ÊäÈëĞÅºÅÆµÓò²¨ĞÎ')
+ title('è¾“å…¥ä¿¡å·é¢‘åŸŸæ³¢å½¢')
  axis([-8 8 0 2.6]);
  
  figure(3)
  psf1=(abs(Fmt).^2)/T;
  plot(fmt,psf1);
  axis([-34 34 0 max(psf1)]);
- title('ÊäÈëĞÅºÅ¹¦ÂÊÆ×');     %ĞÂÔö¼Ó
+ title('è¾“å…¥ä¿¡å·åŠŸç‡è°±');     %æ–°å¢åŠ 
 
  figure(4)
  plot(t,ct);
- title('ÔØ²¨ĞÅºÅÊ±Óò²¨ĞÎ');
+ title('è½½æ³¢ä¿¡å·æ—¶åŸŸæ³¢å½¢');
  axis([0 5 -1.01 1.01]);
  line([0,5],[0,0],'color','k');
 
  figure(5)
  [fct,Fct]=T2F(t,ct);
  plot(fct,Fct);
- title('ÔØ²¨ĞÅºÅÆµÓò²¨ĞÎ')
+ title('è½½æ³¢ä¿¡å·é¢‘åŸŸæ³¢å½¢')
  axis([-24 24 0 2.6]);
  
- %vsb modulation                               %vsb µ÷ÖÆ¹ı³Ì
- s_vsb=mt.*ct;                                 %ÒÑµ÷ĞÅºÅs_vsb                                                     
- [f,sf]=T2F(t,s_vsb);                          %T-F¸µÀïÒ¶±ä»»,Êä³öÆµÂÊºÍĞÅºÅ·ù¶È
- [t,s_vsb]=vsbpf(f,sf,0.2*fm,1.2*fm,fc);       %¾­¹ıvsbÂË²¨Æ÷
+ %vsb modulation                               %vsb è°ƒåˆ¶è¿‡ç¨‹
+ s_vsb=mt.*ct;                                 %å·²è°ƒä¿¡å·s_vsb                                                     
+ [f,sf]=T2F(t,s_vsb);                          %T-Få‚…é‡Œå¶å˜æ¢,è¾“å‡ºé¢‘ç‡å’Œä¿¡å·å¹…åº¦
+ [t,s_vsb]=vsbpf(f,sf,0.2*fm,1.2*fm,fc);       %ç»è¿‡vsbæ»¤æ³¢å™¨
  figure(6)
  plot(t,s_vsb);
  grid on;
- title('VSBµ÷ÖÆĞÅºÅÊ±Óò²¨ĞÎ');
+ title('VSBè°ƒåˆ¶ä¿¡å·æ—¶åŸŸæ³¢å½¢');
  axis([0 5 -0.6 0.6]);
  line([0,5],[0,0],'color','k');
  
  figure(7)
  [fvsb,Fvsb]=T2F(t,s_vsb);
  plot(fvsb,Fvsb);
- title('VSBµ÷ÖÆĞÅºÅÆµÓò²¨ĞÎ');
+ title('VSBè°ƒåˆ¶ä¿¡å·é¢‘åŸŸæ³¢å½¢');
  axis([-34 34 0 0.7]);
  
  figure(8)
  psf=(abs(Fvsb).^2)/T;
  plot(fvsb,psf);
  axis([-34 34 0 max(psf)]);
- title('VSBĞÅºÅ¹¦ÂÊÆ×²¨ĞÎ'); 
+ title('VSBä¿¡å·åŠŸç‡è°±æ³¢å½¢'); 
 
  svsb1=awgn(s_vsb,5); 
  svsb2=awgn(s_vsb,10);
  svsb3=awgn(s_vsb,15);
  figure(9)
  subplot(311)
- plot(t,svsb1);                                          %»­³öDSBĞÅºÅ²¨ĞÎ
+ plot(t,svsb1);                                          %ç”»å‡ºDSBä¿¡å·æ³¢å½¢
  hold on
- plot (t,mt,'r-');                                       %»­³öÔ­ĞÅºÅ
- title('VSBµ÷ÖÆĞÅºÅ S/N=5dB');
+ plot (t,mt,'r-');                                       %ç”»å‡ºåŸä¿¡å·
+ title('VSBè°ƒåˆ¶ä¿¡å· S/N=5dB');
  axis([0 5 -2.4 2.4]);
  line([0,5],[0,0],'color','k');
  subplot(312)
- plot(t,svsb2);                                          %»­³öDSBĞÅºÅ²¨ĞÎ
+ plot(t,svsb2);                                          %ç”»å‡ºDSBä¿¡å·æ³¢å½¢
  hold on
- plot (t,mt,'r-');                                       %»­³öÔ­ĞÅºÅ
- title('VSBµ÷ÖÆĞÅºÅ S/N=10dB');
+ plot (t,mt,'r-');                                       %ç”»å‡ºåŸä¿¡å·
+ title('VSBè°ƒåˆ¶ä¿¡å· S/N=10dB');
  axis([0 5 -2.4 2.4]);
  line([0,5],[0,0],'color','k');
  subplot(313)
- plot(t,svsb3);                                          %»­³öDSBĞÅºÅ²¨ĞÎ
+ plot(t,svsb3);                                          %ç”»å‡ºDSBä¿¡å·æ³¢å½¢
  hold on
- plot (t,mt,'r-');                                       %»­³öÔ­ĞÅºÅ
- title('VSBµ÷ÖÆĞÅºÅ S/N=15dB');
+ plot (t,mt,'r-');                                       %ç”»å‡ºåŸä¿¡å·
+ title('VSBè°ƒåˆ¶ä¿¡å· S/N=15dB');
  axis([0 5 -2.4 2.4]);
  line([0,5],[0,0],'color','k');
 
- %vsb demodulation                                %vsb½âµ÷¹ı³Ì
+ %vsb demodulation                                %vsbè§£è°ƒè¿‡ç¨‹
  Sp1=svsb1.*ct;
  Sp2=svsb2.*ct;
  Sp3=svsb3.*ct;
@@ -97,46 +97,46 @@ dt=0.001;                                      %²ÉÑùÊ±¼ä¼ä¸ô
  subplot(311)
  plot(t,Sp1);
  hold on
- plot (t,mt,'r-');                                       %»­³öÔ­ĞÅºÅ
- title('VSBµ÷ÖÆĞÅºÅÏà¸É½âµ÷Óëµ÷ÖÆĞÅºÅ S/N=5dB')
+ plot (t,mt,'r-');                                       %ç”»å‡ºåŸä¿¡å·
+ title('VSBè°ƒåˆ¶ä¿¡å·ç›¸å¹²è§£è°ƒä¸è°ƒåˆ¶ä¿¡å· S/N=5dB')
  axis([0 5 -1.5 1.5]);
  line([0,5],[0,0],'color','k');
  subplot(312)
  plot(t,Sp2);
  hold on
- plot (t,mt,'r-');                                       %»­³öÔ­ĞÅºÅ
- title('VSBµ÷ÖÆĞÅºÅÏà¸É½âµ÷Óëµ÷ÖÆĞÅºÅ S/N=10dB')
+ plot (t,mt,'r-');                                       %ç”»å‡ºåŸä¿¡å·
+ title('VSBè°ƒåˆ¶ä¿¡å·ç›¸å¹²è§£è°ƒä¸è°ƒåˆ¶ä¿¡å· S/N=10dB')
  axis([0 5 -1.5 1.5]);
  line([0,5],[0,0],'color','k');
  subplot(313)
  plot(t,Sp3);
  hold on
- plot (t,mt,'r-');                                       %»­³öÔ­ĞÅºÅ
- title('VSBµ÷ÖÆĞÅºÅÏà¸É½âµ÷Óëµ÷ÖÆĞÅºÅ S/N=15dB')
+ plot (t,mt,'r-');                                       %ç”»å‡ºåŸä¿¡å·
+ title('VSBè°ƒåˆ¶ä¿¡å·ç›¸å¹²è§£è°ƒä¸è°ƒåˆ¶ä¿¡å· S/N=15dB')
  axis([0 5 -1.5 1.5]);
  line([0,5],[0,0],'color','k');
  
- [f1,rf1]=T2F(t,Sp1);                                          %T-F¸µÀïÒ¶±ä»»
- [t,Sp1]=lpf(f1,rf1,2*fm);                                %¾­¹ıµÍÍ¨ÂË²¨Æ÷
- [f2,rf2]=T2F(t,Sp2);                                          %T-F¸µÀïÒ¶±ä»»
- [t,Sp2]=lpf(f2,rf2,2*fm);                                %¾­¹ıµÍÍ¨ÂË²¨Æ÷
- [f3,rf3]=T2F(t,Sp3);                                          %T-F¸µÀïÒ¶±ä»»
- [t,Sp3]=lpf(f3,rf3,2*fm);                                %¾­¹ıµÍÍ¨ÂË²¨Æ÷
+ [f1,rf1]=T2F(t,Sp1);                                          %T-Få‚…é‡Œå¶å˜æ¢
+ [t,Sp1]=LPF(f1,rf1,2*fm);                                %ç»è¿‡ä½é€šæ»¤æ³¢å™¨
+ [f2,rf2]=T2F(t,Sp2);                                          %T-Få‚…é‡Œå¶å˜æ¢
+ [t,Sp2]=LPF(f2,rf2,2*fm);                                %ç»è¿‡ä½é€šæ»¤æ³¢å™¨
+ [f3,rf3]=T2F(t,Sp3);                                          %T-Få‚…é‡Œå¶å˜æ¢
+ [t,Sp3]=LPF(f3,rf3,2*fm);                                %ç»è¿‡ä½é€šæ»¤æ³¢å™¨
 
  figure(11)
  subplot(311)
  plot(t,Sp1);
  axis([2 3 -0.5 0.5]);
  line([0,5],[0,0],'color','k');
- title('¾­¹ıµÍÍ¨ÂË²¨µÄÏà¸É½âµ÷ĞÅºÅ²¨ĞÎ S/N=5dB');
+ title('ç»è¿‡ä½é€šæ»¤æ³¢çš„ç›¸å¹²è§£è°ƒä¿¡å·æ³¢å½¢ S/N=5dB');
  subplot(312)
  plot(t,Sp2);
  line([0,5],[0,0],'color','k');
  axis([2 3 -0.5 0.5]);
- title('¾­¹ıµÍÍ¨ÂË²¨µÄÏà¸É½âµ÷ĞÅºÅ²¨ĞÎ S/N=10dB');
+ title('ç»è¿‡ä½é€šæ»¤æ³¢çš„ç›¸å¹²è§£è°ƒä¿¡å·æ³¢å½¢ S/N=10dB');
  subplot(313)
  plot(t,Sp3);
  axis([2 3 -0.5 0.5]);
  line([0,5],[0,0],'color','k');
- title('¾­¹ıµÍÍ¨ÂË²¨µÄÏà¸É½âµ÷ĞÅºÅ²¨ĞÎ S/N=15dB');
+ title('ç»è¿‡ä½é€šæ»¤æ³¢çš„ç›¸å¹²è§£è°ƒä¿¡å·æ³¢å½¢ S/N=15dB');
  xlabel('t')
