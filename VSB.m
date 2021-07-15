@@ -117,10 +117,10 @@ dt=0.001;                                      %采样时间间隔
  line([0,5],[0,0],'color','k');
  
  [f1,rf1]=T2F(t,Sp1);                                          %T-F傅里叶变换
- [t,Sp1]=LPF(f1,rf1,2*fm);                                %经过低通滤波器
- [f2,rf2]=T2F(t,Sp2);                                          %T-F傅里叶变换
+ [t,Sp1]=lpf(f1,rf1,2*fm);                                %经过低通滤波器
+ [f2,rf2]=lpf(t,Sp2);                                          %T-F傅里叶变换
  [t,Sp2]=LPF(f2,rf2,2*fm);                                %经过低通滤波器
- [f3,rf3]=T2F(t,Sp3);                                          %T-F傅里叶变换
+ [f3,rf3]=lpf(t,Sp3);                                          %T-F傅里叶变换
  [t,Sp3]=LPF(f3,rf3,2*fm);                                %经过低通滤波器
 
  figure(11)
