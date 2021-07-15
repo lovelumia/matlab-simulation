@@ -1,4 +1,4 @@
-function[t,st]=lpf(f,sf,B)%µÍÍ¨ÂË²¨Æ÷º¯Êý
+function[t,st]=lpf(f,sf,B)%ä½Žé€šæ»¤æ³¢å™¨å‡½æ•°
 df=f(2)-f(1);
 fN=length(f);
 ym=zeros(1,fN);
