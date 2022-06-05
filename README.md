@@ -1,2 +1,2 @@
 # matlab-simulation
-a vsb modulation based on matlab
+A vsb modulation based on matlab.
